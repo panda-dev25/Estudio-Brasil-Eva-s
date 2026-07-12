@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estúdio Brasil Eva's</title>
+<link rel="icon" type="image/png" href="imagens/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     RESET & BASE
+  ============================================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --gold:       #c9964a;
+    --gold-light: #e0b96b;
+    --gold-dark:  #9e7035;
+    --dark:       #111009;
+    --dark-mid:   #1c1a14;
+    --cream:      #f5f0e8;
+    --cream-mid:  #ede7db;
+    --warm-gray:  #8a8070;
+    --text:       #2a2519;
+    --radius:     12px;
+    --shadow-card: 0 4px 20px rgba(0,0,0,.09);
+    --shadow-hover: 0 16px 48px rgba(0,0,0,.18);
+    --transition: .3s cubic-bezier(.4,0,.2,1);
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--text);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  h1,h2,h3,h4 { font-family: 'Cormorant Garamond', serif; }
+
+  img { display: block; max-width: 100%; }
+
+  a { text-decoration: none; color: inherit; }
+
+  section { scroll-margin-top: 72px; }
+
+  /* ============================================================
+     SCROLLBAR
+  ============================================================ */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--cream-mid); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+  /* ============================================================
+     NAV
+  ============================================================ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 72px;
+    background: rgba(17,16,9,.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(201,150,74,.18);
+    transition: background var(--transition);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .logo-icon {
+    width: 46px;
+    height: 46px;
+    border: 1.5px solid var(--gold);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: -2px;
+    padding-left: 2px;
+  }
+
+  .logo-text { line-height: 1.1; }
+  .logo-text strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .logo-text span {
+    font-size: 10px;
+    color: var(--gold-light);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+  .logo-img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.footer-logo-img {
+  width: 38px;
+  height: 38px;
+}
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,.82);
+    letter-spacing: .06em;
+    transition: color var(--transition);
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width var(--transition);
+  }
+  .nav-links a:hover { color: #fff; }
+  .nav-links a:hover::after { width: 100%; }
+
+  .btn-whatsapp-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--gold);
+    color: var(--dark) !important;
+    border-radius: 8px;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    letter-spacing: .04em;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition) !important;
+  }
+  .btn-whatsapp-nav:hover {
+    background: var(--gold-light) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201,150,74,.4);
+  }
+  .btn-whatsapp-nav::after { display: none !important; }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+
+  /* Mobile nav */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 72px; left: 0; right: 0;
+    background: rgba(17,16,9,.97);
+    padding: 24px 40px 32px;
+    z-index: 999;
+    flex-direction: column;
+    gap: 20px;
+    border-bottom: 1px solid rgba(201,150,74,.2);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: rgba(255,255,255,.82);
+    font-size: 16px;
+    letter-spacing: .06em;
+    transition: color var(--transition);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-menu .btn-wa-mobile {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    background: var(--gold);
+    color: var(--dark);
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 15px;
+    border-bottom: none;
+  }
+
+  /* ============================================================
+     HERO
+  ============================================================ */
+  #inicio {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--dark);
+  }
+
+  /* ── FOTO DO HEADER ── */
+  /* Substitua o bloco abaixo pela sua tag <img> ou altere o background-image */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    /* /foto do header/ – cole aqui o caminho da imagem: background-image: url('SUA-FOTO.jpg'); */
+    background-color: #1c1a14;
+    background-image: url('imagens/hero.jpg'); /* ← adicione a foto aqui */
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    /* Comentário para facilitar: a foto fica atrás de todos os textos */
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(10,9,6,.88) 0%,
+      rgba(10,9,6,.72) 50%,
+      rgba(10,9,6,.15) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 140px 40px 80px;
+    max-width: 640px;
+    animation: fadeUp .9s ease both;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    animation: fadeUp .9s .1s ease both;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '';
+    flex: 0 0 32px; height: 1px;
+    background: var(--gold);
+  }
+  .hero-eyebrow span {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: .22em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-size: clamp(48px, 7vw, 78px);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.0;
+    margin-bottom: 18px;
+    animation: fadeUp .9s .2s ease both;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(18px, 2.4vw, 24px);
+    color: var(--gold-light);
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 14px;
+    animation: fadeUp .9s .3s ease both;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,.72);
+    line-height: 1.7;
+    max-width: 440px;
+    margin-bottom: 10px;
+    animation: fadeUp .9s .35s ease both;
+  }
+
+  .hero-small {
+    font-size: 13px;
+    color: rgba(255,255,255,.52);
+    margin-bottom: 40px;
+    animation: fadeUp .9s .38s ease both;
+  }
+
+  .hero-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 48px;
+    animation: fadeUp .9s .45s ease both;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 24px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: .05em;
+    cursor: pointer;
+    border: none;
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  }
+  .btn:hover { transform: translateY(-3px); }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+  }
+  .btn-primary:hover {
+    background: var(--gold-light);
+    box-shadow: 0 8px 28px rgba(201,150,74,.45);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.35);
+  }
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    box-shadow: 0 8px 28px rgba(0,0,0,.3);
+  }
+
+  .hero-hours {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,.5);
+    font-size: 13px;
+    animation: fadeUp .9s .55s ease both;
+  }
+  .hero-hours svg { color: var(--gold); flex-shrink: 0; }
+
+  /* ============================================================
+     SECTION HEADER
+  ============================================================ */
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(36px, 5vw, 54px);
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  .section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    width: 48px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+  .section-divider::after {
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .section-divider-gem {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  /* ============================================================
+     PROCEDIMENTOS
+  ============================================================ */
+  #procedimentos {
+    padding: 100px 40px;
+    background: var(--cream);
+  }
+
+  .procedures-grid {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .proc-card {
+    display: grid;
+    grid-template-columns: 110px 1fr auto;
+    align-items: center;
+    gap: 28px;
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    box-shadow: var(--shadow-card);
+    transition: transform var(--transition), box-shadow var(--transition);
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .proc-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+  .proc-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+  }
+  .proc-card:hover::before { opacity: 1; }
+
+  /* Circle photo */
+  .proc-photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--gold-light);
+    background: var(--cream-mid);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .proc-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  /* Placeholder icon when no image */
+  .proc-photo-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--dark-mid), #2a2519);
+  }
+  .proc-photo-placeholder svg { color: var(--gold); }
+
+ .proc-info h3 {
+  font-size: clamp(24px, 3vw, 30px);
+  font-weight: 500;
+  color: #1f1b14;
+  margin-bottom: 8px;
+}
+
+.proc-info p {
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #5f574b;
+  line-height: 1.6;
+  max-width: 460px;
+}
+
+  .proc-price {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .proc-price .from {
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+}
+.proc-price .value {
+    font-family: 'Jost', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gold);
+}
+  .proc-price .value.small { font-size: 22px; }
+
+  /* Cabelo card extra – two price lines */
+  .proc-extra-prices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    min-width: 440px;
+  }
+
+  .proc-extra-prices .price-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 24px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .proc-extra-prices .price-item .label {
+    grid-column: 1;
+    grid-row: 1;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #2a2519;
+    margin-bottom: 4px;
+  }
+
+  .proc-extra-prices .price-item .sub-label {
+    grid-column: 1;
+    grid-row: 2;
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #6f675c;
+    line-height: 1.5;
+  }
+
+  .proc-extra-prices .price-item .price-val {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+    font-family: 'Jost', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* Pé e Mão – two day prices */
+  .proc-day-prices {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .proc-day-prices .day-block .day-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  color: #222;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+ .proc-day-prices .day-block .day-val {
+  font-family: 'Jost', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gold);
+}
+  /* ============================================================
+     COMO CHEGAR / ENDEREÇO
+  ============================================================ */
+  #endereco {
+    padding: 100px 40px;
+    background: var(--cream-mid);
+  }
+
+  .location-grid {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .location-info .eyebrow {
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .location-info h2 {
+    font-size: clamp(32px, 4vw, 46px);
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 36px;
+    line-height: 1.1;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .info-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .info-icon svg {
+    color: var(--gold);
+  }
+
+  .info-item h4 {
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 3px;
+    letter-spacing: .04em;
+  }
+
+  .info-item p {
+    font-size: 14px;
+    color: var(--warm-gray);
+    line-height: 1.5;
+  }
+
+  .btn-maps {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: var(--dark);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: .05em;
+    margin-top: 8px;
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  }
+
+  .btn-maps:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0,0,0,.28);
+    background: #2a2519;
+  }
+
+  .map-wrapper {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,.16);
+    height: 360px;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .map-wrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,.22);
+  }
+
+  .map-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  /* ============================================================
+     FAQ
+  ============================================================ */
+  #faq {
+    padding: 100px 40px;
+    background: var(--cream);
+  }
+
+  .faq-grid {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .faq-item {
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .faq-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 24px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition);
+  }
+
+  .faq-question h4 {
+    font-family: 'Jost', sans-serif;
+    font-size: 14.5px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .faq-icon {
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--gold);
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1;
+    transition: transform var(--transition), background var(--transition), color var(--transition);
+  }
+
+  .faq-item.open .faq-question {
+    border-color: rgba(201,150,74,.2);
+  }
+
+  .faq-item.open .faq-icon {
+    transform: rotate(45deg);
+    background: var(--gold);
+    color: var(--dark);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .45s cubic-bezier(.4,0,.2,1), padding .3s ease;
+    padding: 0 24px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--warm-gray);
+    line-height: 1.7;
+    padding: 16px 0 22px;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 300px;
+  }
+
+  /* ============================================================
+     DEPOIMENTOS
+  ============================================================ */
+  #depoimentos {
+    padding: 100px 40px;
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #depoimentos::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,150,74,.08), transparent);
+    pointer-events: none;
+  }
+
+  #depoimentos .section-title {
+    color: #fff;
+  }
+
+  #depoimentos .section-eyebrow {
+    color: var(--gold-light);
+  }
+
+  .testimonials-grid {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .testi-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(201,150,74,.18);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+
+  display: flex;
+  flex-direction: column;
+}
+
+  .testi-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255,255,255,.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(201,150,74,.3);
+  }
+
+  .testi-stars {
+    color: var(--gold);
+    font-size: 15px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+.testi-text {
+    font-size: 14.5px;
+    color: rgba(255,255,255,.75);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    font-style: italic;
+    flex: 1;
+}
+
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .testi-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--dark);
+    font-weight: 600;
+  }
+
+  .testi-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+
+  .testi-role {
+    font-size: 12px;
+    color: var(--gold-light);
+  }
+
+  /* ============================================================
+     CTA BANNER
+  ============================================================ */
+  .cta-banner {
+    background: linear-gradient(135deg, #1c1a14 0%, #2a2519 100%);
+    padding: 48px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .cta-banner h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .cta-banner p {
+    font-size: 15px;
+    color: rgba(255,255,255,.55);
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+
+  .btn-wa-big {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--dark);
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: .05em;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .btn-wa-big:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(201,150,74,.5);
+  }
+
+  .cta-phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,.55);
+    font-size: 14px;
+  }
+
+  /* ============================================================
+     FOOTER
+  ============================================================ */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(201,150,74,.12);
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-copy {
+    font-size: 12.5px;
+    color: rgba(255,255,255,.35);
+    letter-spacing: .04em;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 12px;
+  }
+
+  .social-btn {
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,.5);
+    transition: border-color var(--transition), color var(--transition), transform var(--transition);
+  }
+
+  .social-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  /* ============================================================
+     ANIMATIONS
+  ============================================================ */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* stagger children */
+  .stagger > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+
+  .stagger.visible > *:nth-child(1) {
+    opacity: 1;
+    transform: none;
+    transition-delay: .0s;
+  }
+
+  .stagger.visible > *:nth-child(2) {
+    opacity: 1;
+    transform: none;
+    transition-delay: .12s;
+  }
+
+  .stagger.visible > *:nth-child(3) {
+    opacity: 1;
+    transform: none;
+    transition-delay: .24s;
+  }
+
+  .stagger.visible > *:nth-child(4) {
+    opacity: 1;
+    transform: none;
+    transition-delay: .36s;
+  }
+
+  .stagger.visible > *:nth-child(5) {
+    opacity: 1;
+    transform: none;
+    transition-delay: .48s;
+  }
+
+  .stagger.visible > *:nth-child(6) {
+    opacity: 1;
+    transform: none;
+    transition-delay: .60s;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+  @media (max-width: 900px) {
+    nav {
+      padding: 0 24px;
+    }
+    .nav-links,
+    .btn-whatsapp-nav {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+#inicio {
+  min-height: unset !important;
+  height: auto !important;
+  align-items: flex-start;
+}
+
+.hero-content {
+  padding: 88px 24px 30px;
+  max-width: 100%;
+}
+  #inicio {
+  min-height: 100svh;
+  align-items: flex-start;
+}
+.hero-bg {
+  background-position: 65% center;
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(10,9,6,.88) 0%,
+    rgba(10,9,6,.68) 55%,
+    rgba(10,9,6,.25) 100%
+  );
+}
+
+    #procedimentos,
+    #endereco,
+    #faq,
+    #depoimentos {
+      padding: 72px 24px;
+    }
+
+    .proc-card {
+      grid-template-columns: 80px 1fr;
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+
+    .proc-price,
+    .proc-extra-prices,
+    .proc-day-prices {
+      grid-column: 1 / -1;
+      text-align: left;
+    }
+
+    .proc-extra-prices {
+      min-width: 0;
+      width: 100%;
+    }
+
+    .proc-photo {
+      width: 72px;
+      height: 72px;
+    }
+
+    .location-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .map-wrapper {
+      height: 280px;
+    }
+
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-banner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 56px 24px;
+    }
+
+    .cta-actions {
+      align-items: flex-start;
+    }
+
+    footer {
+      padding: 24px;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .footer-social {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero-btns {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .mobile-menu {
+      padding: 20px 24px 28px;
+    }
+
+    .proc-extra-prices .price-item {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      row-gap: 4px;
+    }
+
+    .proc-extra-prices .price-item .label,
+    .proc-extra-prices .price-item .sub-label,
+    .proc-extra-prices .price-item .price-val {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .proc-extra-prices .price-item .price-val {
+      margin-top: 4px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+============================================================ -->
+<nav>
+  <a href="#inicio" class="nav-logo">
+    <img src="imagens/logo.png" alt="Logo Estúdio Brasil Eva's" class="logo-img">
+    <div class="logo-text">
+      <strong>Estúdio Brasil Eva's</strong>
+      <span>Beleza · Estilo · Cuidado</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#inicio">Início</a></li>
+    <li><a href="#procedimentos">Procedimentos</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#faq">Perguntas</a></li>
+    <li><a href="#contato">Contato</a></li>
+    <li>
+      <a href="https://wa.me/5513996012287?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20no%20Estúdio%20Brasil%20Eva's." target="_blank" class="btn-whatsapp-nav">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Agendar pelo WhatsApp
+      </a>
+    </li>
+  </ul>
+
+  <div class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#inicio" onclick="toggleMenu()">Início</a>
+  <a href="#procedimentos" onclick="toggleMenu()">Procedimentos</a>
+  <a href="#depoimentos" onclick="toggleMenu()">Depoimentos</a>
+  <a href="#faq" onclick="toggleMenu()">Perguntas Frequentes</a>
+  <a href="#endereco" onclick="toggleMenu()">Como Chegar</a>
+  <a href="https://wa.me/5513996012287?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20no%20Estúdio%20Brasil%20Eva's." target="_blank" class="btn-wa-mobile" onclick="toggleMenu()">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Agendar pelo WhatsApp
+  </a>
+</div>
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="inicio">
+  <!-- /foto do header/ – substitua o background-image no CSS acima com o caminho da sua foto -->
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span>Bem-vinda ao</span>
+    </div>
+
+    <h1 class="hero-title">Estúdio<br>Brasil Eva's</h1>
+
+    <p class="hero-subtitle">Sua beleza com atendimento especializado</p>
+
+
+    <div class="hero-btns">
+      <a href="https://wa.me/5513996012287?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20no%20Estúdio%20Brasil%20Eva's." target="_blank" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Agendar pelo WhatsApp
+      </a>
+
+      <a href="#procedimentos" class="btn btn-outline">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        Ver Procedimentos
+      </a>
+
+      <a href="#endereco" class="btn btn-outline">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Como Chegar
+      </a>
+    </div>
+
+    <div class="hero-hours">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Terça a Sábado &nbsp;·&nbsp; 10h às 19h
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCEDIMENTOS
+============================================================ -->
+<section id="procedimentos">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Nossos</p>
+    <h2 class="section-title">Procedimentos</h2>
+    <div class="section-divider"><div class="section-divider-gem"></div></div>
+  </div>
+
+  <div class="procedures-grid stagger">
+
+    <!-- CABELO -->
+    <div class="proc-card">
+      <div class="proc-photo">
+  <img src="imagens/cabelo.jpg" alt="Cabelo">
+</div>
+
+      <div class="proc-info">
+        <h3>Cabelo</h3>
+        <p>Corte, escova, progressiva, coloração, tintura, hidratação, reconstrução e tratamentos para todos os tipos de cabelo.</p>
+      </div>
+
+      <div class="proc-extra-prices">
+        <div class="price-item">
+          <span class="label">Revitalização Capilar</span>
+          <span class="sub-label">Corte + hidratação intensiva para revitalizar os fios.</span>
+          <span class="price-val">R$79,00</span>
+        </div>
+
+        <div class="price-item" style="border-top:1px solid #f0ebe2;padding-top:10px;margin-top:2px;">
+          <span class="label">Brilho e Finalização</span>
+          <span class="sub-label">Cauterização para redução de frizz e brilho intenso.</span>
+          <span class="price-val">R$149,00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PÉ E MÃO -->
+    <div class="proc-card">
+      <div class="proc-photo">
+      <div class="proc-photo">
+  <img src="imagens/manicure.jpg" alt="Pé e Mão">
+</div>
+      </div>
+      <div class="proc-info">
+        <h3>Pé e Mão</h3>
+        <p>Manicure e pedicure com atendimento completo e valores especiais durante a semana.</p>
+      </div>
+
+      <div class="proc-day-prices">
+        <div class="day-block">
+          <div class="day-label">Terça e Quarta</div>
+          <div class="day-val">R$54,90</div>
+        </div>
+
+        <div class="day-block">
+          <div class="day-label">Quinta a Sábado</div>
+          <div class="day-val">R$64,90</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEPILAÇÃO -->
+    <div class="proc-card">
+      <div class="proc-photo">
+      <div class="proc-photo">
+  <img src="imagens/depilacao.jpg" alt="Depilação">
+</div>
+      </div>
+
+      <div class="proc-info">
+        <h3>Depilação</h3>
+        <p>Depilação com conforto, atendimento cuidadoso e resultado duradouro.</p>
+      </div>
+
+      <div class="proc-price">
+        <div class="from">A partir de</div>
+        <div class="value">R$99</div>
+      </div>
+    </div>
+
+    <!-- CÍLIOS -->
+    <div class="proc-card">
+      <div class="proc-photo">
+      <div class="proc-photo">
+  <img src="imagens/cilios.jpg" alt="Cílios">
+</div>
+      </div>
+
+      <div class="proc-info">
+        <h3>Cílios</h3>
+        <p>Alongamento e design de cílios para destacar o olhar de forma natural.</p>
+      </div>
+
+      <div class="proc-price">
+        <div class="from">A partir de</div>
+        <div class="value">R$89,90</div>
+      </div>
+    </div>
+
+    <!-- TRATAMENTOS -->
+    <div class="proc-card">
+      <div class="proc-photo">
+      <div class="proc-photo">
+  <img src="imagens/hidratacao.jpg" alt="Hidratação">
+</div>
+      </div>
+
+      <div class="proc-info">
+        <h3>Tratamentos</h3>
+        <p>Hidratação, cauterização e cuidados para manter os fios saudáveis e alinhados.</p>
+      </div>
+
+      <div class="proc-price">
+        <div class="from">A partir de</div>
+        <div class="value">R$149</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     DEPOIMENTOS
+============================================================ -->
+<section id="depoimentos">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Depoimentos</p>
+    <h2 class="section-title">O que nossas clientes dizem</h2>
+    <div class="section-divider"><div class="section-divider-gem"></div></div>
+  </div>
+
+  <div class="testimonials-grid stagger">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Ambiente aconchegante e atendimento impecável. Saí do estúdio me sentindo completamente renovada. Recomendo de olhos fechados!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">A</div>
+        <div>
+          <div class="testi-name">Ana Clara</div>
+          <div class="testi-role">Cliente</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Fiz progressiva e ficou perfeita! Durável, com brilho incrível e as profissionais são super atenciosas. Já virei cliente do estúdio."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">J</div>
+        <div>
+          <div class="testi-name">Juliana Mendes</div>
+          <div class="testi-role">Cliente</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Os cílios ficaram maravilhosos e o atendimento foi super rápido e cuidadoso. Ambiente muito organizado e cheiroso. Nota 10!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">F</div>
+        <div>
+          <div class="testi-name">Fernanda Lima</div>
+          <div class="testi-role">Cliente</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMO CHEGAR / ENDEREÇO
+============================================================ -->
+<section id="endereco">
+  <div class="location-grid">
+    <div class="location-info reveal">
+      <p class="eyebrow">Como Chegar</p>
+      <h2>Encontre<br>nosso espaço</h2>
+
+      <div class="info-item">
+        <div class="info-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div>
+          <h4>Endereço</h4>
+          <p>Rua Guarany, 206<br>Próximo à Frei Gaspar</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <h4>Funcionamento</h4>
+          <p>Terça a Sábado — 10h às 19h</p>
+        </div>
+      </div>
+
+      <a href="https://www.google.com/maps/search/?api=1&query=Rua+Guarany,+206,+Parque+São+Vicente,+São+Vicente,+SP,+11360-000" target="_blank" class="btn-maps">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Abrir no Google Maps
+      </a>
+    </div>
+
+    <div class="map-wrapper reveal">
+      <iframe
+        src="https://maps.google.com/maps?q=Rua+Guarany,+206,+Parque+São+Vicente,+São+Vicente,+SP,+11360-000&output=embed"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Localização do Estúdio Brasil Eva's"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section id="faq">
+  <div class="section-header reveal">
+    <h2 class="section-title">Perguntas Frequentes</h2>
+    <div class="section-divider"><div class="section-divider-gem"></div></div>
+  </div>
+
+  <div class="faq-grid stagger">
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <h4>Preciso agendar com quanto tempo de antecedência?</h4>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Recomendamos agendar com pelo menos 2 a 3 dias de antecedência para garantir seu horário preferido, especialmente para atendimentos aos sábados.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <h4>Vocês atendem apenas com hora marcada?</h4>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Trabalhamos prioritariamente com hora marcada para garantir a qualidade e exclusividade do seu atendimento, mas você pode consultar encaixes de última hora via WhatsApp.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <h4>Quais formas de pagamento vocês aceitam?</h4>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Aceitamos cartões de crédito e débito (principais bandeiras), dinheiro e Pix.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <h4>Onde exatamente vocês estão localizados?</h4>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Estamos na Rua Guarany, 206, em São Vicente, próximo à Frei Gaspar. Você pode clicar no botão 'Como Chegar' para abrir o GPS.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <h4>Faz atendimento aos sábados?</h4>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Sim! Atendemos de terça a sábado, das 10h às 19h. Recomendamos agendar os sábados com pelo menos 2 a 3 dias de antecedência, pois costumam lotar rapidinho.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-question">
+        <h4>Quais produtos capilares vocês utilizam?</h4>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">
+        <p>Utilizamos apenas marcas profissionais de alta performance, com foco em produtos que respeitam a saúde dos fios e possuem ativos naturais.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA BANNER
+============================================================ -->
+<div id="contato" class="cta-banner">
+  <div>
+    <h2>Reserve seu momento</h2>
+    <p>Fale diretamente pelo WhatsApp para tirar dúvidas ou reservar seu atendimento.</p>
+  </div>
+
+  <div class="cta-actions">
+    <a href="https://wa.me/5513996012287?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20no%20Estúdio%20Brasil%20Eva's." target="_blank" class="btn-wa-big">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Agendar pelo WhatsApp
+    </a>
+
+    <div class="cta-phone">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+      (13) 99601-2287
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="nav-logo" style="gap:10px;">
+    <img src="imagens/logo.png" alt="Logo Estúdio Brasil Eva's" class="logo-img footer-logo-img">
+    <div class="logo-text">
+      <strong style="color:rgba(255,255,255,.7);">Estúdio Brasil Eva's</strong>
+      <span>Beleza · Estilo · Cuidado</span>
+    </div>
+  </div>
+
+  <p class="footer-copy">© 2025 Estúdio Brasil Eva's. Todos os direitos reservados.</p>
+
+  <div class="footer-social">
+    <a href="https://instagram.com" target="_blank" class="social-btn" aria-label="Instagram">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+
+    <a href="https://facebook.com" target="_blank" class="social-btn" aria-label="Facebook">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+    </a>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JS
+============================================================ -->
+<script>
+  /* --- Mobile menu toggle --- */
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+
+  /* --- FAQ accordion --- */
+  function toggleFaq(item) {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* --- Scroll reveal (IntersectionObserver) --- */
+  const revealEls = document.querySelectorAll('.reveal, .stagger');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  /* --- Nav background on scroll --- */
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(17,16,9,.97)';
+    } else {
+      nav.style.background = 'rgba(17,16,9,.82)';
+    }
+  }, { passive: true });
+
+  /* --- Close mobile menu on scroll --- */
+  window.addEventListener('scroll', () => {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }, { passive: true });
+</script>
+</body>
+</html>
